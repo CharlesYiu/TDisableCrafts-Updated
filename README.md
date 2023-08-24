@@ -7,11 +7,13 @@ Simple plugin to disable craft
 
 # Commands
 - /tdc reload
+- /tdc version
 
 # Permissions
 - tdc.reload
 - tdc.craft.(item ID)
 - tdc.craft.*
+- tdc.version
 
 # Dependencies
 - None
