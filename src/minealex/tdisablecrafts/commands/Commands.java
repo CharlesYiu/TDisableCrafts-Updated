@@ -10,12 +10,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class Commands implements CommandExecutor {
     private final Plugin plugin;
     private final FileConfiguration config;
-    
+
     public Commands(Plugin plugin) {
         this.plugin = plugin;
         this.config = plugin.getConfig();
     }
-    
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("tdc")) {
@@ -29,11 +29,21 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', noPermissionMessage));
                 }
                 return true;
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("version")) {
+                if (sender.hasPermission("tdc.version")) {
+                    String versionMessage = config.getString("messages.version", "&5TDisableCrafts &e> &aVersion: &e%s");
+                    String pluginVersion = plugin.getDescription().getVersion();
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(versionMessage, pluginVersion)));
+                } else {
+                    String noPermissionMessage = config.getString("messages.no-permission", "&5TDisableCrafts &e> &cYou don't have permission to use this command.");
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', noPermissionMessage));
+                }
+                return true;
             }
         }
         return false;
     }
-    
+
     private void reloadConfig() {
         plugin.reloadConfig();
     }

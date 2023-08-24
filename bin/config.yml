@@ -1,6 +1,7 @@
 messages:
   no-permission: "&5TDisableCrafts &e> &cYou don't have permission to use this command."
   reload: "&5TDisableCrafts &e> &aConfiguration reloaded."
+  version: "&5TDisableCrafts &e> &aVersion: &e%s"
 blocked-crafts:
   - DIAMOND_SWORD
   - GOLDEN_APPLE
