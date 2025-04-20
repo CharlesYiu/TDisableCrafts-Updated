@@ -10,6 +10,7 @@ import org.bukkit.event.Event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -50,7 +51,12 @@ public class CraftsListener implements Listener {
             return; // Allow unlimited crafting
         }
 
-        ItemStack result = event.getRecipe().getResult();
+        Recipe recipe = event.getRecipe();
+        if (recipe == null) {
+            return;
+        }
+        ItemStack result = recipe.getResult();
+
         Material resultMaterial = result.getType();
 
         if (config.getStringList("blocked-crafts").contains(resultMaterial.toString())) {
